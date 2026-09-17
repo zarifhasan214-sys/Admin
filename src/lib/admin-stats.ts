@@ -169,7 +169,19 @@ export async function donorVerificationBreakdown(): Promise<Bucket[]> {
 
 export async function recentAudit(limit = 12) {
   return db
-    .select()
+    .select({
+      id: auditLogs.id,
+      actorId: auditLogs.actorId,
+      actorRole: auditLogs.actorRole,
+      actorName: sql<string | null>`null`,
+      action: auditLogs.action,
+      resourceType: auditLogs.resourceType,
+      resourceId: auditLogs.resourceId,
+      previousState: auditLogs.previousState,
+      newState: auditLogs.newState,
+      ipAddress: auditLogs.ipAddress,
+      createdAt: auditLogs.createdAt,
+    })
     .from(auditLogs)
     .orderBy(desc(auditLogs.createdAt))
     .limit(limit);
