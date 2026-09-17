@@ -1,5 +1,9 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import { sql } from "drizzle-orm";
+
+dotenv.config({ path: ".env.local" });
+dotenv.config();
+
 import { db, pool } from "./index";
 import {
   auditLogs,

@@ -116,18 +116,18 @@ export const users = pgTable(
   "users",
   {
     id: serial("id").primaryKey(),
-    name: varchar("email", { length: 200 }).notNull(),
+    name: varchar("name", { length: 200 }).notNull(),
     email: varchar("email", { length: 200 }).notNull(),
-    phone: varchar("language", { length: 8 }),
+    phone: varchar("phone", { length: 32 }),
     passwordHash: text("password_hash").notNull(),
     role: userRoleEnum("role").notNull().default("USER"),
     status: userStatusEnum("status").notNull().default("ACTIVE"),
     emailVerified: boolean("email_verified").notNull().default(false),
-    statusReason: text("language"),
-    statusChangedAt: timestamp("created_at", { withTimezone: true }),
-    statusChangedBy: integer("id"),
+    statusReason: text("status_reason"),
+    statusChangedAt: timestamp("status_changed_at", { withTimezone: true }),
+    statusChangedBy: integer("status_changed_by"),
     lastLoginAt: timestamp("last_login_at", { withTimezone: true }),
-    preferredLanguage: varchar("language", { length: 8 })
+    preferredLanguage: varchar("preferred_language", { length: 8 })
       .notNull()
       .default("bn"),
     createdAt: timestamp("created_at", { withTimezone: true })
